@@ -8,45 +8,24 @@
 <style>
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-behavior:smooth}
 :root{
-  --bg-base:#05070f;
-  --text:#ffffff;
-  --muted:rgba(255,255,255,.66);
-  --glass:rgba(255,255,255,.08);
-  --glass-2:rgba(255,255,255,.15);
-  --border:rgba(255,255,255,.14);
-  --border-strong:rgba(255,255,255,.28);
+  --bg-base:#05070f;--text:#ffffff;--muted:rgba(255,255,255,.66);
+  --glass:rgba(255,255,255,.08);--glass-2:rgba(255,255,255,.15);
+  --border:rgba(255,255,255,.14);--border-strong:rgba(255,255,255,.28);
   --panel:rgba(12,16,32,.52);
-  --accent1:#6366f1;
-  --accent2:#a855f7;
-  --accent3:#3b82f6;
-  --danger:#ff453a;
-  --ok:#22c55e;
-  --tick:#7cc4ff;
-  --shadow:0 14px 44px rgba(0,0,0,.45);
-  --dot-ring:#0b1020;
+  --accent1:#6366f1;--accent2:#a855f7;--accent3:#3b82f6;
+  --danger:#ff453a;--ok:#22c55e;--tick:#7cc4ff;
+  --shadow:0 14px 44px rgba(0,0,0,.45);--dot-ring:#0b1020;
 }
 [data-theme="light"]{
-  --bg-base:#e8ecff;
-  --text:#0b1226;
-  --muted:rgba(11,18,38,.62);
-  --glass:rgba(255,255,255,.55);
-  --glass-2:rgba(255,255,255,.8);
-  --border:rgba(11,18,38,.10);
-  --border-strong:rgba(11,18,38,.2);
-  --panel:rgba(255,255,255,.48);
-  --shadow:0 14px 44px rgba(35,48,110,.18);
-  --dot-ring:#ffffff;
+  --bg-base:#e8ecff;--text:#0b1226;--muted:rgba(11,18,38,.62);
+  --glass:rgba(255,255,255,.55);--glass-2:rgba(255,255,255,.8);
+  --border:rgba(11,18,38,.10);--border-strong:rgba(11,18,38,.2);
+  --panel:rgba(255,255,255,.48);--shadow:0 14px 44px rgba(35,48,110,.18);--dot-ring:#ffffff;
 }
-
 *{box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,"SF Arabic","Segoe UI",Tahoma,Arial,sans-serif;-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
 body{margin:0;display:grid;place-items:center;overflow:hidden;background:var(--bg-base);color:var(--text);transition:background .5s ease,color .5s ease}
-
-.glassbox,.topbar,.item,.card,.bubble,.inputbar,.segmented button,.icon-btn,.id-chip{
-  transition:background .4s ease,color .4s ease,border-color .4s ease,box-shadow .35s ease,transform .25s ease;
-}
-
-/* ===== الخلفية الحية ===== */
+.glassbox,.topbar,.item,.card,.bubble,.inputbar,.segmented button,.icon-btn,.id-chip{transition:background .4s ease,color .4s ease,border-color .4s ease,box-shadow .35s ease,transform .25s ease}
 .bg{position:fixed;inset:0;z-index:-1;overflow:hidden;background:var(--bg-base)}
 .orb{position:absolute;border-radius:50%;filter:blur(72px);opacity:.5;mix-blend-mode:screen;animation:drift 20s ease-in-out infinite alternate}
 .orb1{width:58vmax;height:58vmax;top:-22vmax;right:-16vmax;background:radial-gradient(circle at 32% 32%,#6366f1,transparent 62%)}
@@ -58,82 +37,44 @@ body{margin:0;display:grid;place-items:center;overflow:hidden;background:var(--b
 [data-theme="light"] .ring{opacity:.5}
 @keyframes drift{0%{transform:translate3d(0,0,0) scale(1)}50%{transform:translate3d(6vmax,-5vmax,0) scale(1.14)}100%{transform:translate3d(-6vmax,5vmax,0) scale(.94)}}
 @keyframes spin{to{transform:rotate(360deg)}}
-
-/* ===== الأيقونات ===== */
 .icon{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;display:inline-block;vertical-align:middle;transition:transform .3s ease}
-.icon.sm{width:16px;height:16px}
-.icon.xs{width:14px;height:14px;stroke-width:2.4}
-.icon.xl{width:44px;height:44px}
+.icon.sm{width:16px;height:16px}.icon.xs{width:14px;height:14px;stroke-width:2.4}.icon.xl{width:44px;height:44px}
 .flip-rtl{transform:scaleX(-1)}
-
-/* ===== الزجاج ===== */
-.glassbox{
-  background:linear-gradient(var(--panel),var(--panel)) padding-box,
-             linear-gradient(135deg,var(--border-strong),var(--border) 45%,transparent) border-box;
-  border:1px solid transparent;
-  backdrop-filter:blur(26px) saturate(1.5);
-  -webkit-backdrop-filter:blur(26px) saturate(1.5);
-  box-shadow:var(--shadow);
-}
-
-.phone{position:relative;width:min(480px,100vw);height:100dvh;overflow:hidden;border-radius:34px;
-  background:linear-gradient(rgba(255,255,255,.05),rgba(255,255,255,.02)) padding-box,
-             linear-gradient(150deg,rgba(255,255,255,.35),rgba(255,255,255,.04) 40%,transparent) border-box;
-  border:1px solid transparent;backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);box-shadow:var(--shadow)}
+.glassbox{background:linear-gradient(var(--panel),var(--panel)) padding-box,linear-gradient(135deg,var(--border-strong),var(--border) 45%,transparent) border-box;border:1px solid transparent;backdrop-filter:blur(26px) saturate(1.5);-webkit-backdrop-filter:blur(26px) saturate(1.5);box-shadow:var(--shadow)}
+.phone{position:relative;width:min(480px,100vw);height:100dvh;overflow:hidden;border-radius:34px;background:linear-gradient(rgba(255,255,255,.05),rgba(255,255,255,.02)) padding-box,linear-gradient(150deg,rgba(255,255,255,.35),rgba(255,255,255,.04) 40%,transparent) border-box;border:1px solid transparent;backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);box-shadow:var(--shadow)}
 @media(max-width:500px){.phone{width:100vw;height:100dvh;border-radius:0;border:none}}
-
 .view{position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;pointer-events:none;transform:translateY(20px) scale(.985);transition:opacity .38s ease,transform .38s cubic-bezier(.22,.9,.3,1)}
 .view.active{opacity:1;pointer-events:auto;transform:none}
-
 button{border:none;color:#fff;background:linear-gradient(135deg,var(--accent1),var(--accent2));border-radius:16px;padding:13px 16px;font-weight:800;font-size:14px;cursor:pointer;box-shadow:0 10px 26px rgba(99,102,241,.28);display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:transform .16s ease,filter .2s ease,box-shadow .3s ease,background .4s ease}
-button:hover{filter:brightness(1.08)}
-button:active{transform:scale(.93)}
-button:active .icon{transform:rotate(80deg) scale(.9)}
-
+button:hover{filter:brightness(1.08)}button:active{transform:scale(.93)}button:active .icon{transform:rotate(80deg) scale(.9)}
 input,textarea{width:100%;border:none;outline:none;color:var(--text);background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:14px 16px;font-size:15px;transition:background .25s,box-shadow .25s,border-color .25s;font-family:inherit}
 input::placeholder,textarea::placeholder{color:var(--muted)}
 input:focus,textarea:focus{background:var(--glass-2);animation:focusPulse 1.4s ease-in-out infinite alternate}
 textarea{resize:none;line-height:1.6;max-height:120px;overflow-y:auto}
 @keyframes focusPulse{from{box-shadow:inset 0 0 0 2px rgba(124,196,255,.16)}to{box-shadow:inset 0 0 0 3px rgba(124,196,255,.38)}}
-
 .topbar{display:flex;align-items:center;gap:10px;margin:14px;padding:12px 14px;border-radius:26px;animation:slideDown .5s cubic-bezier(.22,.9,.3,1)}
 @keyframes slideDown{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:none}}
 @keyframes slideUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
 @keyframes pop{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
-
 .icon-btn{width:44px;height:44px;padding:0;border-radius:50%;background:var(--glass);border:1px solid var(--border);box-shadow:none;color:var(--text)}
 .icon-btn.danger{background:rgba(255,69,58,.16);border-color:rgba(255,69,58,.3);color:#ffb4ae}
-
 .avatar{position:relative;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:19px;color:#fff;background:linear-gradient(135deg,var(--accent1),var(--accent3));box-shadow:0 10px 24px rgba(99,102,241,.35),inset 0 1px 0 rgba(255,255,255,.4);flex-shrink:0;animation:pop .4s ease}
 .avatar .dot{position:absolute;bottom:0;inset-inline-end:0;width:12px;height:12px;border-radius:50%;background:#64748b;border:2.5px solid var(--dot-ring);transition:background .3s,box-shadow .3s}
 .avatar.online .dot{background:var(--ok);animation:pulse 1.8s infinite}
-#contacts .avatar .dot{display:none}
-#contacts .avatar.online .dot{display:block}
+#contacts .avatar .dot{display:none}#contacts .avatar.online .dot{display:block}
 @keyframes pulse{50%{box-shadow:0 0 0 6px rgba(34,197,94,.12)}}
-
 .grow{flex:1;min-width:0}
 .title{font-weight:900;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .subtitle{color:var(--muted);font-size:12px;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-
 .id-chip{display:inline-flex;align-items:center;gap:6px;margin-top:5px;padding:5px 11px;border-radius:999px;background:var(--glass);border:1px solid var(--border);box-shadow:none;color:var(--muted);font-size:11px;font-weight:600}
 .id-chip span{max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-
-/* ===== الدخول ===== */
 .auth{margin:18px;flex:1;justify-content:center;gap:14px;padding:28px;border-radius:36px;animation:pop .5s ease}
 .auth>*{animation:slideUp .55s cubic-bezier(.22,.9,.3,1) both}
-.auth>*:nth-child(1){animation-delay:.05s}
-.auth>*:nth-child(2){animation-delay:.12s}
-.auth>*:nth-child(3){animation-delay:.19s}
-.auth>*:nth-child(4){animation-delay:.26s}
-.auth>*:nth-child(5){animation-delay:.33s}
+.auth>*:nth-child(1){animation-delay:.05s}.auth>*:nth-child(2){animation-delay:.12s}.auth>*:nth-child(3){animation-delay:.19s}.auth>*:nth-child(4){animation-delay:.26s}.auth>*:nth-child(5){animation-delay:.33s}
 .logo{width:92px;height:92px;margin:0 auto 4px;border-radius:32px;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,var(--accent1),var(--accent2) 60%,var(--accent3));box-shadow:0 20px 50px rgba(99,102,241,.45),inset 0 2px 0 rgba(255,255,255,.4);animation:float 3.6s ease-in-out infinite alternate}
 @keyframes float{from{transform:translateY(0) rotate(-2deg)}to{transform:translateY(-10px) rotate(2deg)}}
-.center{text-align:center}
-h1{margin:0;font-size:27px;font-weight:900;letter-spacing:-.5px}
-h3{margin:0;font-size:17px;font-weight:900}
+.center{text-align:center}h1{margin:0;font-size:27px;font-weight:900;letter-spacing:-.5px}h3{margin:0;font-size:17px;font-weight:900}
 .muted{color:var(--muted);font-size:13px;line-height:1.9}
-
-/* ===== القائمة ===== */
 .search{position:relative;margin:0 14px 12px;border-radius:20px;animation:slideUp .45s ease}
 .search .icon{position:absolute;inset-inline-start:15px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
 .search input{background:transparent;border:none;padding:13px 46px;animation:none}
@@ -145,126 +86,59 @@ h3{margin:0;font-size:17px;font-weight:900}
 .item-sub{color:var(--muted);font-size:12px;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .empty{margin-top:40px;display:flex;flex-direction:column;align-items:center;gap:12px;color:var(--muted);animation:slideUp .5s ease}
 .empty .icon{width:56px;height:56px;stroke-width:1.4;opacity:.5}
-
 .badge{min-width:22px;height:22px;padding:0 7px;border-radius:999px;background:linear-gradient(135deg,var(--accent1),var(--accent2));color:#fff;font-size:11px;font-weight:800;display:grid;place-items:center;box-shadow:0 6px 16px rgba(99,102,241,.5);animation:pop .3s ease;flex-shrink:0}
-
 .item-del{width:34px;height:34px;padding:0;border-radius:50%;background:var(--glass);border:1px solid var(--border);box-shadow:none;color:var(--muted);flex-shrink:0}
-.item-del .icon{width:15px;height:15px}
-.item-del:active{color:#ffb4ae;background:rgba(255,69,58,.18)}
-
+.item-del .icon{width:15px;height:15px}.item-del:active{color:#ffb4ae;background:rgba(255,69,58,.18)}
 .fab{position:absolute;bottom:26px;left:24px;width:62px;height:62px;padding:0;border-radius:50%;background:linear-gradient(135deg,var(--accent1),var(--accent2));box-shadow:0 18px 44px rgba(99,102,241,.5);z-index:6;animation:pop .45s ease,fabGlow 3s ease-in-out infinite}
 .fab .icon{width:26px;height:26px;stroke-width:2.6}
 @keyframes fabGlow{50%{box-shadow:0 18px 60px rgba(168,85,247,.65)}}
-
-/* ===== المحادثة ===== */
 .messages{flex:1;overflow-y:auto;padding:14px 16px;scroll-behavior:smooth;display:block;-webkit-overflow-scrolling:touch}
 .msg{display:block;margin-bottom:10px;animation:msgIn .38s cubic-bezier(.22,.9,.32,1.2)}
 @keyframes msgIn{from{opacity:0;transform:translateY(18px) scale(.88)}to{opacity:1;transform:none}}
-
-.bubble{
-  display:block;
-  width:fit-content;
-  width:-moz-fit-content;
-  height:auto;
-  min-height:0;
-  max-width:82%;
-  position:relative;
-  padding:12px 16px 9px;
-  border-radius:24px;
-  line-height:1.65;
-  font-size:15px;
-  white-space:normal;
-}
+.bubble{display:block;width:fit-content;width:-moz-fit-content;height:auto;min-height:0;max-width:82%;position:relative;padding:12px 16px 9px;border-radius:24px;line-height:1.65;font-size:15px;white-space:normal}
 .bubble .text{white-space:pre-wrap;word-wrap:break-word;overflow-wrap:break-word}
-.msg.me .bubble{
-  margin-right:auto;
-  margin-left:0;
-  color:#fff;
-  background:linear-gradient(135deg,var(--accent1),var(--accent2) 45%,var(--accent3) 90%);
-  background-size:220% 220%;
-  animation:gradMove 7s ease-in-out infinite alternate;
-  border:1px solid rgba(255,255,255,.3);
-  border-bottom-left-radius:8px;
-  box-shadow:0 12px 32px rgba(99,102,241,.4),
-             inset 0 1px 0 rgba(255,255,255,.45),
-             inset 0 14px 28px rgba(255,255,255,.14);
-}
+.msg.me .bubble{margin-right:auto;margin-left:0;color:#fff;background:linear-gradient(135deg,var(--accent1),var(--accent2) 45%,var(--accent3) 90%);background-size:220% 220%;animation:gradMove 7s ease-in-out infinite alternate;border:1px solid rgba(255,255,255,.3);border-bottom-left-radius:8px;box-shadow:0 12px 32px rgba(99,102,241,.4),inset 0 1px 0 rgba(255,255,255,.45),inset 0 14px 28px rgba(255,255,255,.14)}
 @keyframes gradMove{from{background-position:0% 50%}to{background-position:100% 50%}}
-.msg.peer .bubble{
-  margin-left:auto;
-  margin-right:0;
-  color:var(--text);
-  background:linear-gradient(var(--glass-2),var(--glass)) padding-box,
-             linear-gradient(150deg,var(--border-strong),transparent 65%) border-box;
-  border:1px solid transparent;
-  border-bottom-right-radius:8px;
-  backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-  box-shadow:0 10px 28px var(--shadow),
-             inset 0 1px 0 rgba(255,255,255,.2);
-}
-
-.msg.me .bubble.sticker-bubble,
-.msg.peer .bubble.sticker-bubble{
-  background:none;
-  border:none;
-  box-shadow:none;
-  backdrop-filter:none;
-  -webkit-backdrop-filter:none;
-  padding:4px 6px 0;
-  animation:none;
-}
+.msg.peer .bubble{margin-left:auto;margin-right:0;color:var(--text);background:linear-gradient(var(--glass-2),var(--glass)) padding-box,linear-gradient(150deg,var(--border-strong),transparent 65%) border-box;border:1px solid transparent;border-bottom-right-radius:8px;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 10px 28px var(--shadow),inset 0 1px 0 rgba(255,255,255,.2)}
+.msg.me .bubble.sticker-bubble,.msg.peer .bubble.sticker-bubble{background:none;border:none;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;padding:4px 6px 0;animation:none}
 .sticker-img{width:150px;max-width:100%;border-radius:18px;display:block;animation:pop .35s ease}
 .sticker-dl{display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 22px;border-radius:20px;border:1.5px dashed var(--border-strong);background:var(--glass);color:var(--text);box-shadow:none;font-size:12px;font-weight:800}
-.sticker-dl .icon{width:26px;height:26px}
-.sticker-dl:active{transform:scale(.95)}
-
+.sticker-dl .icon{width:26px;height:26px}.sticker-dl:active{transform:scale(.95)}
 .meta{display:block;text-align:left;margin-top:6px;font-size:10px;line-height:1.4;white-space:nowrap;color:rgba(255,255,255,.78)}
-.msg.peer .meta{color:var(--muted)}
-.meta .icon{vertical-align:-2px}
-.meta .tick{color:var(--tick)}
-
+.msg.peer .meta{color:var(--muted)}.meta .icon{vertical-align:-2px}.meta .tick{color:var(--tick)}
 .inputbar{display:flex;align-items:flex-end;gap:8px;margin:12px 14px 16px;padding:8px 10px;border-radius:28px;animation:slideUp .4s ease}
 .inputbar textarea{flex:1;background:transparent;border:none;padding:11px 12px;animation:none;max-height:110px}
 .inputbar textarea:focus{animation:focusPulse 1.4s ease-in-out infinite alternate}
 .send{width:48px;height:48px;padding:0;border-radius:50%;background:linear-gradient(135deg,var(--accent1),var(--accent2));box-shadow:0 12px 30px rgba(99,102,241,.4);flex-shrink:0}
-
-/* ===== لوحة الملصقات ===== */
 .sheet{position:absolute;left:0;right:0;bottom:0;transform:translateY(105%);transition:transform .38s cubic-bezier(.22,.9,.3,1);z-index:15;padding:14px 14px 18px;border-radius:30px 30px 0 0;max-height:52%;display:flex;flex-direction:column;gap:12px}
-.sheet.active{transform:none}
-.sheet-head{display:flex;align-items:center;gap:10px}
+.sheet.active{transform:none}.sheet-head{display:flex;align-items:center;gap:10px}
 .sticker-grid{overflow-y:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding-bottom:8px;-webkit-overflow-scrolling:touch}
 .sticker-tile{position:relative;aspect-ratio:1;border-radius:16px;overflow:hidden;background:var(--glass);border:1px solid var(--border);cursor:pointer;animation:pop .3s ease both;transition:transform .2s ease}
-.sticker-tile:active{transform:scale(.92)}
-.sticker-tile img{width:100%;height:100%;object-fit:cover;display:block}
+.sticker-tile:active{transform:scale(.92)}.sticker-tile img{width:100%;height:100%;object-fit:cover;display:block}
 .sticker-tile .del{position:absolute;top:5px;inset-inline-end:5px;width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,.6);color:#fff;display:grid;place-items:center}
 .sticker-tile .del .icon{width:12px;height:12px}
 .empty-stickers{grid-column:1/-1;text-align:center;color:var(--muted);padding:22px 0;font-size:13px;line-height:1.9}
-
-/* ===== الإعدادات ===== */
 .settings-body{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:12px;-webkit-overflow-scrolling:touch}
 .card{border-radius:26px;padding:18px;display:flex;flex-direction:column;gap:12px;animation:slideUp .4s ease both}
-.card-title{display:flex;align-items:center;gap:9px;font-weight:900;font-size:14px;color:var(--muted)}
-.card-title .icon{width:18px;height:18px}
+.card-title{display:flex;align-items:center;gap:9px;font-weight:900;font-size:14px;color:var(--muted)}.card-title .icon{width:18px;height:18px}
 .segmented{display:flex;gap:4px;padding:4px;border-radius:999px;background:var(--glass);border:1px solid var(--border)}
 .segmented button{flex:1;border-radius:999px;background:transparent;box-shadow:none;color:var(--muted);padding:11px}
 .segmented button.active{background:linear-gradient(135deg,var(--accent1),var(--accent2));color:#fff;box-shadow:0 8px 22px rgba(99,102,241,.4)}
 .danger-full{background:linear-gradient(135deg,rgba(255,69,58,.92),rgba(255,69,58,.55));box-shadow:0 12px 30px rgba(255,69,58,.32)}
-
-/* ===== المنبثقة والتوست ===== */
 .modal{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(0,0,0,.4);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;pointer-events:none;transition:opacity .28s ease;z-index:20}
 .modal.active{opacity:1;pointer-events:auto}
 .modal .card{width:min(100%,350px);animation:none;transform:scale(.9) translateY(16px);transition:transform .3s cubic-bezier(.22,.9,.3,1.2)}
 .modal.active .card{transform:none}
-.row{display:flex;gap:10px}
-.row button{flex:1}
+.row{display:flex;gap:10px}.row button{flex:1}
 .secondary{background:var(--glass-2);border:1px solid var(--border);color:var(--text);box-shadow:none}
-
 .toast{position:absolute;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);max-width:86%;background:rgba(10,14,30,.82);border:1px solid rgba(255,255,255,.16);padding:12px 20px;border-radius:999px;color:#fff;font-size:13px;font-weight:700;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;z-index:30;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 14px 40px rgba(0,0,0,.4)}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.debug-bar{position:absolute;top:0;left:0;right:0;padding:6px 12px;font-size:11px;font-family:monospace;color:#fff;background:rgba(255,69,58,.85);text-align:center;z-index:50;display:none}
+.debug-bar.show{display:block}
 </style>
 </head>
 <body>
+<div class="debug-bar" id="debugBar"></div>
 
 <svg style="display:none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
   <symbol id="i-back" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
@@ -288,19 +162,15 @@ h3{margin:0;font-size:17px;font-weight:900}
 </svg>
 
 <div class="bg">
-  <div class="orb orb1"></div>
-  <div class="orb orb2"></div>
-  <div class="orb orb3"></div>
-  <div class="ring"></div>
-  <div class="noise"></div>
+  <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
+  <div class="ring"></div><div class="noise"></div>
 </div>
 
 <div class="phone">
-
   <section id="authView" class="view glassbox auth active">
     <div class="logo"><svg class="icon xl" width="44" height="44"><use href="#i-chat"/></svg></div>
     <h1 class="center">شات زجاجي</h1>
-    <p class="muted center">اكتب اسمك وابدأ. تُحفظ بياناتك على جهازك، وتُقرأ المحادثات القديمة بدون اتصال.</p>
+    <p class="muted center">اكتب اسمك وابدأ. تُحفظ بياناتك على جهازك.</p>
     <input id="nameInput" placeholder="اسمك أو اليوزر">
     <button onclick="createAccount()">ابدأ الآن</button>
   </section>
@@ -314,14 +184,11 @@ h3{margin:0;font-size:17px;font-weight:900}
       </div>
       <button class="icon-btn" onclick="shareId()" aria-label="مشاركة"><svg class="icon" width="22" height="22"><use href="#i-share"/></svg></button>
     </header>
-
     <div class="search glassbox">
       <svg class="icon" width="22" height="22"><use href="#i-search"/></svg>
       <input id="search" oninput="renderContacts()" placeholder="بحث في المحادثات">
     </div>
-
     <div id="contacts" class="list"></div>
-
     <button class="fab" onclick="openAdd()" aria-label="إضافة"><svg class="icon" width="26" height="26"><use href="#i-plus"/></svg></button>
   </section>
 
@@ -333,14 +200,12 @@ h3{margin:0;font-size:17px;font-weight:900}
         <div class="title" id="peerName">...</div>
         <div class="subtitle" id="peerStatus">غير متصل</div>
       </div>
-      <button class="icon-btn danger" onclick="deleteChat()" aria-label="مسح المحادثة"><svg class="icon" width="22" height="22"><use href="#i-trash"/></svg></button>
+      <button class="icon-btn danger" onclick="deleteChat()" aria-label="مسح"><svg class="icon" width="22" height="22"><use href="#i-trash"/></svg></button>
     </header>
-
     <div id="messages" class="messages"></div>
-
     <footer class="inputbar glassbox">
       <button class="icon-btn" onclick="toggleSheet(true)" aria-label="ملصقات"><svg class="icon" width="22" height="22"><use href="#i-smile"/></svg></button>
-      <textarea id="message" rows="1" placeholder="اكتب رسالة... (Enter لسطر جديد)" onkeydown="onMsgKey(event)"></textarea>
+      <textarea id="message" rows="1" placeholder="اكتب رسالة..." onkeydown="onMsgKey(event)"></textarea>
       <button class="send" onclick="sendMsg()" aria-label="إرسال"><svg class="icon flip-rtl" width="22" height="22"><use href="#i-send"/></svg></button>
     </footer>
   </section>
@@ -350,30 +215,26 @@ h3{margin:0;font-size:17px;font-weight:900}
       <button class="icon-btn" onclick="showView('contactsView')" aria-label="رجوع"><svg class="icon" width="22" height="22"><use href="#i-back"/></svg></button>
       <div class="grow"><div class="title">الإعدادات</div></div>
     </header>
-
     <div class="settings-body">
       <div class="card glassbox">
         <div class="card-title"><svg class="icon" width="18" height="18"><use href="#i-user"/></svg> الملف الشخصي</div>
         <input id="settingsName" placeholder="الاسم الجديد">
         <button onclick="saveName()"><svg class="icon sm" width="16" height="16"><use href="#i-edit"/></svg> حفظ الاسم</button>
       </div>
-
-      <div class="card glassbox" style="animation-delay:.06s">
+      <div class="card glassbox">
         <div class="card-title"><svg class="icon" width="18" height="18"><use href="#i-moon"/></svg> المظهر</div>
         <div class="segmented">
           <button id="btnDark" onclick="setTheme('dark')"><svg class="icon sm" width="16" height="16"><use href="#i-moon"/></svg> ليلي</button>
           <button id="btnLight" onclick="setTheme('light')"><svg class="icon sm" width="16" height="16"><use href="#i-sun"/></svg> نهاري</button>
         </div>
       </div>
-
-      <div class="card glassbox" style="animation-delay:.12s">
+      <div class="card glassbox">
         <div class="card-title"><svg class="icon" width="18" height="18"><use href="#i-share"/></svg> المعرف</div>
         <div class="row">
           <button onclick="copyMyId()"><svg class="icon sm" width="16" height="16"><use href="#i-copy"/></svg> نسخ</button>
           <button class="secondary" onclick="shareId()"><svg class="icon sm" width="16" height="16"><use href="#i-share"/></svg> مشاركة</button>
         </div>
       </div>
-
       <button class="danger-full" onclick="deleteAccount()"><svg class="icon sm" width="16" height="16"><use href="#i-trash"/></svg> إزالة الحساب</button>
     </div>
   </section>
@@ -381,7 +242,7 @@ h3{margin:0;font-size:17px;font-weight:900}
   <div id="stickerSheet" class="sheet glassbox">
     <div class="sheet-head">
       <div class="grow"><div class="title">الملصقات</div></div>
-      <button class="icon-btn" onclick="document.getElementById('stickerFile').click()" aria-label="إنشاء ملصق"><svg class="icon" width="22" height="22"><use href="#i-plus"/></svg></button>
+      <button class="icon-btn" onclick="document.getElementById('stickerFile').click()" aria-label="إنشاء"><svg class="icon" width="22" height="22"><use href="#i-plus"/></svg></button>
       <button class="icon-btn" onclick="toggleSheet(false)" aria-label="إغلاق"><svg class="icon" width="22" height="22"><use href="#i-x"/></svg></button>
     </div>
     <div class="sticker-grid" id="stickerGrid"></div>
@@ -391,7 +252,7 @@ h3{margin:0;font-size:17px;font-weight:900}
   <div id="addModal" class="modal" onclick="if(event.target===this) closeAdd()">
     <div class="card glassbox">
       <h3>إضافة شخص</h3>
-      <p class="muted" style="margin:0">الصق معرف الشخص الذي تريد محادثته.</p>
+      <p class="muted" style="margin:0">الصق معرف الشخص.</p>
       <input id="friendId" placeholder="مثال: user-abc12345" onkeydown="if(event.key==='Enter') addAndConnect()">
       <div class="row">
         <button onclick="addAndConnect()">اتصال</button>
@@ -399,15 +260,20 @@ h3{margin:0;font-size:17px;font-weight:900}
       </div>
     </div>
   </div>
-
   <div id="toast" class="toast"></div>
 </div>
 
 <script>
 const $ = id => document.getElementById(id);
+const dbg = (msg, isErr) => {
+  console.log('[Chatoo]', msg);
+  const bar = $('debugBar');
+  if (isErr) { bar.textContent = '⚠ ' + msg; bar.classList.add('show'); setTimeout(() => bar.classList.remove('show'), 4000); }
+};
 
 let peer = null, conn = null, currentPeerId = null, activeChatId = null, lastActivePeerId = null;
 let idRetries = 0, reconnectTimer = null, hbTimer = null, mgrTimer = null, lastAlive = Date.now();
+let serverReconnectAttempts = 0;
 let myId = localStorage.getItem('glass_id') || '';
 let myName = localStorage.getItem('glass_name') || '';
 let myDevice = localStorage.getItem('glass_device') || '';
@@ -423,18 +289,10 @@ window.addEventListener('DOMContentLoaded', () => {
   sanitizeSelf();
   if (myName && myId) enterApp(); else showView('authView');
   updateTitle();
-
   const msgEl = $('message');
-  msgEl.addEventListener('input', () => {
-    msgEl.style.height = 'auto';
-    msgEl.style.height = Math.min(msgEl.scrollHeight, 110) + 'px';
-  });
-
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) return;
-    lastAlive = Date.now();
-    healConnection();
-  });
+  msgEl.addEventListener('input', () => { msgEl.style.height = 'auto'; msgEl.style.height = Math.min(msgEl.scrollHeight, 110) + 'px'; });
+  document.addEventListener('visibilitychange', () => { if (document.hidden) return; lastAlive = Date.now(); healConnection(); });
+  dbg('✅ التطبيق جاهز');
 });
 
 function onMsgKey(e){
@@ -446,23 +304,9 @@ function onMsgKey(e){
   sendMsg();
 }
 
-function showView(id){
-  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  $(id).classList.add('active');
-}
-
-function toast(text){
-  const t = $('toast');
-  t.textContent = text;
-  t.classList.add('show');
-  clearTimeout(t._h);
-  t._h = setTimeout(() => t.classList.remove('show'), 2400);
-}
-
-function escapeHtml(s){
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
+function showView(id){ document.querySelectorAll('.view').forEach(v => v.classList.remove('active')); $(id).classList.add('active'); }
+function toast(text){ const t = $('toast'); t.textContent = text; t.classList.add('show'); clearTimeout(t._h); t._h = setTimeout(() => t.classList.remove('show'), 2400); }
+function escapeHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 function makeId(){ return 'user-' + Math.random().toString(36).slice(2,10); }
 
 function sanitizeSelf(){
@@ -472,24 +316,17 @@ function sanitizeSelf(){
   if (changed) saveContacts(c);
 }
 
-/* =====================================================
-   نواة الاتصال: نبض + مدير صحة + Tie-Breaker + حراسة الأحداث
-   ===================================================== */
-
-/* نبض القلب: يكشف القناة نصف الميتة */
+/* ===== نواة الاتصال المُصلحة ===== */
 function startHeartbeat(){
   if (hbTimer) return;
   hbTimer = setInterval(() => {
     if (conn && conn.open && !conn._dead) {
       try { conn.send({ type: 'ping' }); } catch(e){}
-      if (Date.now() - lastAlive > 12000) {
-        try { conn.close(); } catch(e){}
-      }
+      if (Date.now() - lastAlive > 12000) { try { conn.close(); } catch(e){} }
     }
   }, 3000);
 }
 
-/* مدير صحة الاتصال: يفحص دوريًا ويصلح أي حالة عالقة */
 function startConnManager(){
   if (mgrTimer) return;
   mgrTimer = setInterval(() => healConnection(), 5000);
@@ -497,7 +334,14 @@ function startConnManager(){
 
 function healConnection(){
   if (!peer || peer.destroyed) return;
-  if (peer.disconnected) { try { peer.reconnect(); } catch(e){} return; }
+  if (peer.disconnected) {
+    if (serverReconnectAttempts < 5) {
+      serverReconnectAttempts++;
+      try { peer.reconnect(); } catch(e){}
+    }
+    return;
+  }
+  serverReconnectAttempts = 0;
 
   const target = activeChatId || lastActivePeerId;
   if (!target) return;
@@ -507,7 +351,7 @@ function healConnection(){
   if (!peerId) return;
 
   const cur = conn;
-  const healthy  = cur && cur.peer === peerId && !cur._dead && cur.open;
+  const healthy = cur && cur.peer === peerId && !cur._dead && cur.open;
   const connecting = cur && cur.peer === peerId && !cur._dead && !cur.open && (Date.now() - (cur._born || 0) < 9000);
   if (healthy || connecting) return;
 
@@ -535,14 +379,12 @@ function ensureConnection(peerId){
   adoptConn(peer.connect(peerId, { reliable: true }), true);
 }
 
-/* تحديث الحالة فقط إذا كانت القناة تخص المحادثة المفتوحة */
 function connStatus(text, online, peerId){
   const ct = activeChatId ? getContacts()[activeChatId] : null;
   if (ct && (ct.peerId || activeChatId) === peerId) setPeerStatus(text, online);
   else refreshDots();
 }
 
-/* تبنّي قناة مع قاعدة حتمية + اعتبار القناة القديمة مشبوهة إذا كانت صامتة أو عالقة */
 function adoptConn(c, outgoing){
   if (conn && conn !== c && conn.peer === c.peer && !conn._dead) {
     const silentTooLong = (Date.now() - lastAlive) > 10000;
@@ -572,22 +414,25 @@ function adoptConn(c, outgoing){
       const ct = getContacts()[activeChatId];
       if (ct && (ct.peerId || activeChatId) === c.peer) syncPending(activeChatId);
     }
+    dbg('🟢 قناة مفتوحة مع ' + c.peer.slice(0, 12));
   });
 
   c.on('data', d => { if (conn === c) handleData(d, c); });
 
   c.on('close', () => {
     c._dead = true;
-    if (conn !== c) return;           /* قناة مستبدلة: لا تقلب الحالة ولا تعيد الاتصال */
+    if (conn !== c) return;
     connStatus('غير متصل', false, c.peer);
     maybeReconnect(c.peer);
+    dbg('🔴 انقطعت القناة');
   });
 
-  c.on('error', () => {
+  c.on('error', (err) => {
     c._dead = true;
     if (conn !== c) return;
-    connStatus('انقطع الاتصال', false, c.peer);
+    connStatus('خطأ اتصال', false, c.peer);
     maybeReconnect(c.peer);
+    dbg('⚠ خطأ: ' + (err.message || err), true);
   });
 
   return true;
@@ -608,24 +453,40 @@ function refreshDots(){
   });
 }
 
+/* ===== إعداد PeerJS مع خوادم متعددة ===== */
 function setupPeer(){
   if (!myId) return;
-  if (typeof Peer === 'undefined') { toast('تحقق من الإنترنت لتفعيل الاتصال'); return; }
+  if (typeof Peer === 'undefined') { dbg('PeerJS غير محمّل!', true); return; }
   if (peer) { try { peer.destroy(); } catch(e){} }
+
+  // خوادم متعددة لزيادة الموثوقية
+  const iceServers = [
+    { urls: 'stun:stun.l.google.com:19302' },
+    { urls: 'stun:stun1.l.google.com:19302' },
+    { urls: 'stun:stun2.l.google.com:19302' },
+    { urls: 'stun:stun.cloudflare.com:3478' },
+    { urls: 'stun:global.stun.twilio.com:3478' }
+  ];
 
   peer = new Peer(myId, {
     debug: 0,
-    config: {
-      iceServers: [
-        { urls: 'stun:stun.l.google.com:19302' }
-        /* لو عندك TURN خاص أضفه هنا: { urls:'turn:...', username:'', credential:'' } */
-      ]
-    }
+    config: { iceServers: iceServers }
   });
 
-  peer.on('open', id => { myId = id; idRetries = 0; localStorage.setItem('glass_id', myId); renderMe(); healConnection(); });
+  peer.on('open', id => {
+    myId = id;
+    idRetries = 0;
+    serverReconnectAttempts = 0;
+    localStorage.setItem('glass_id', myId);
+    renderMe();
+    healConnection();
+    dbg('🌐 متصل بخادم PeerJS');
+  });
+
   peer.on('connection', c => adoptConn(c, false));
+
   peer.on('error', err => {
+    dbg('خطأ PeerJS: ' + err.type, true);
     if (err.type === 'unavailable-id') {
       if (idRetries < 3) { idRetries++; setTimeout(() => setupPeer(), 1200 * idRetries); }
       else { idRetries = 0; myId = makeId(); localStorage.setItem('glass_id', myId); renderMe(); setupPeer(); }
@@ -636,20 +497,27 @@ function setupPeer(){
         if (ct && (ct.peerId || activeChatId) === err.peer) setPeerStatus('غير متصل الآن', false);
       }
     }
-    else if (err.type === 'network') {
-      setTimeout(() => { setupPeer(); healConnection(); }, 2000);
+    else if (err.type === 'network' || err.type === 'server-error' || err.type === 'socket-error' || err.type === 'socket-closed') {
+      if (serverReconnectAttempts < 5) {
+        serverReconnectAttempts++;
+        setTimeout(() => { if (peer) try { peer.reconnect(); } catch(e){} }, 2000 + Math.random() * 1000);
+      }
     }
   });
-  peer.on('disconnected', () => { try { peer.reconnect(); } catch(e){} });
+
+  peer.on('disconnected', () => {
+    if (serverReconnectAttempts < 5) {
+      serverReconnectAttempts++;
+      try { peer.reconnect(); } catch(e){}
+    }
+  });
 }
 
-/* ===== استقبال البيانات ===== */
+/* ===== البيانات ===== */
 function handleData(data, c){
   lastAlive = Date.now();
   if (data.type === 'ping') return;
-
   if (data.type === 'deleteAccount') { removeContactAndHistory(data.deviceId || c.peer); return; }
-
   if (data.type === 'profile') {
     const devId = data.deviceId || c.peer;
     if (devId === myDevice) { try { c.close(); } catch(e){} return; }
@@ -659,85 +527,49 @@ function handleData(data, c){
     syncPending(devId);
     return;
   }
-
   if (data.type === 'msg') {
     const devId = c._dev || c.peer;
-    pushMessage(devId, {
-      from: 'peer',
-      kind: data.kind || 'text',
-      stickerId: data.stickerId || null,
-      text: data.text || '',
-      ts: data.ts,
-      status: 'received'
-    });
+    pushMessage(devId, { from: 'peer', kind: data.kind || 'text', stickerId: data.stickerId || null, text: data.text || '', ts: data.ts, status: 'received' });
     const viewing = activeChatId === devId && $('chatView').classList.contains('active');
     if (!viewing) { addUnread(devId); toast('رسالة جديدة'); }
     return;
   }
-
   if (data.type === 'stickerReq') {
     const st = getStickers()[data.stickerId];
     if (st && c.open) { try { c.send({ type: 'stickerData', stickerId: st.id, name: st.name, dataUrl: st.dataUrl }); } catch(e){} }
     return;
   }
-
   if (data.type === 'stickerData') {
     addStickerData(data.stickerId, data.dataUrl, data.name || 'ملصق');
     if (activeChatId && $('chatView').classList.contains('active')) renderMessages(activeChatId);
-    toast('تم حفظ الملصق على جهازك');
+    toast('تم حفظ الملصق');
     return;
   }
 }
 
-/* ===== ترحيل الدمج ===== */
 function migrateV2(){
   const raw = getContacts();
   const keys = Object.keys(raw);
   if (!keys.length) return;
   if (keys.every(k => raw[k].deviceId)) return;
-
   const byName = {};
-  keys.forEach(k => {
-    const nm = (raw[k].name || k).trim();
-    (byName[nm] = byName[nm] || []).push([k, raw[k]]);
-  });
-
+  keys.forEach(k => { const nm = (raw[k].name || k).trim(); (byName[nm] = byName[nm] || []).push([k, raw[k]]); });
   const next = {};
   Object.entries(byName).forEach(([nm, arr]) => {
     arr.sort((a, b) => (a[1].lastSeen || 0) - (b[1].lastSeen || 0));
     const baseKey = arr[arr.length - 1][0];
     const base = arr[arr.length - 1][1];
-
     let merged = [];
-    arr.forEach(([k]) => {
-      merged = merged.concat(getHistory(k));
-      if (k !== baseKey) localStorage.removeItem(historyKey(k));
-    });
+    arr.forEach(([k]) => { merged = merged.concat(getHistory(k)); if (k !== baseKey) localStorage.removeItem(historyKey(k)); });
     merged.sort((a, b) => (a.ts || 0) - (b.ts || 0));
     const seen = new Set();
-    merged = merged.filter(m => {
-      const sig = m.ts + '|' + m.from + '|' + m.text;
-      if (seen.has(sig)) return false;
-      seen.add(sig);
-      return true;
-    });
+    merged = merged.filter(m => { const sig = m.ts + '|' + m.from + '|' + m.text; if (seen.has(sig)) return false; seen.add(sig); return true; });
     setHistory(baseKey, merged);
-
-    next[baseKey] = {
-      name: nm,
-      peerId: baseKey,
-      lastSeen: base.lastSeen || Date.now(),
-      lastMessage: base.lastMessage || (merged.length ? merged[merged.length - 1].text : ''),
-      unread: arr.reduce((s, [, c]) => s + (c.unread || 0), 0),
-      deviceId: baseKey,
-      legacy: true
-    };
+    next[baseKey] = { name: nm, peerId: baseKey, lastSeen: base.lastSeen || Date.now(), lastMessage: base.lastMessage || (merged.length ? merged[merged.length - 1].text : ''), unread: arr.reduce((s, [, c]) => s + (c.unread || 0), 0), deviceId: baseKey, legacy: true };
   });
-
   saveContacts(next);
 }
 
-/* ===== الثيم ===== */
 function setTheme(t, silent){
   document.documentElement.setAttribute('data-theme', t);
   localStorage.setItem('glass_theme', t);
@@ -746,33 +578,16 @@ function setTheme(t, silent){
   if (!silent) toast(t === 'dark' ? 'تم تفعيل الوضع الليلي' : 'تم تفعيل الوضع النهاري');
 }
 
-/* ===== نسخ ومشاركة ===== */
 async function copyText(text){
   try { await navigator.clipboard.writeText(text); return true; } catch(e){}
-  try {
-    const ta = document.createElement('textarea');
-    ta.value = text;
-    ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0';
-    document.body.appendChild(ta);
-    ta.select();
-    const ok = document.execCommand('copy');
-    ta.remove();
-    return ok;
-  } catch(e){ return false; }
+  try { const ta = document.createElement('textarea'); ta.value = text; ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0'; document.body.appendChild(ta); ta.select(); const ok = document.execCommand('copy'); ta.remove(); return ok; } catch(e){ return false; }
 }
-async function copyMyId(){
-  toast(await copyText(myId) ? 'تم نسخ المعرف تلقائيًا' : 'تعذر النسخ على هذا المتصفح');
-}
-function shareId(){
-  const text = 'معرفي في الشات: ' + myId;
-  if (navigator.share) navigator.share({ title: 'شات زجاجي', text }).catch(()=>{});
-  else copyMyId();
-}
+async function copyMyId(){ toast(await copyText(myId) ? 'تم نسخ المعرف' : 'تعذر النسخ'); }
+function shareId(){ const text = 'معرفي: ' + myId; if (navigator.share) navigator.share({ title: 'شات زجاجي', text }).catch(()=>{}); else copyMyId(); }
 
-/* ===== الحساب ===== */
 function createAccount(){
   const name = $('nameInput').value.trim();
-  if (!name) { toast('اكتب اسمك أولًا'); return; }
+  if (!name) { toast('اكتب اسمك'); return; }
   myName = name;
   if (!myId) myId = makeId();
   localStorage.setItem('glass_name', myName);
@@ -791,89 +606,42 @@ function enterApp(){
   showView('contactsView');
 }
 
-function renderMe(){
-  $('meName').textContent = myName || 'مستخدم';
-  $('meId').textContent = myId;
-}
+function renderMe(){ $('meName').textContent = myName || 'مستخدم'; $('meId').textContent = myId; }
+function openSettings(){ $('settingsName').value = myName; showView('settingsView'); }
+function saveName(){ const n = $('settingsName').value.trim(); if (!n) { toast('اكتب اسمًا'); return; } myName = n; localStorage.setItem('glass_name', n); renderMe(); toast('تم الحفظ'); showView('contactsView'); }
 
-function openSettings(){
-  $('settingsName').value = myName;
-  showView('settingsView');
-}
-
-function saveName(){
-  const n = $('settingsName').value.trim();
-  if (!n) { toast('اكتب اسمًا صحيحًا'); return; }
-  myName = n;
-  localStorage.setItem('glass_name', n);
-  renderMe();
-  toast('تم حفظ الاسم');
-  showView('contactsView');
-}
-
-/* ===== جهات الاتصال ===== */
 function getContacts(){ return JSON.parse(localStorage.getItem('glass_contacts') || '{}'); }
 function saveContacts(c){ localStorage.setItem('glass_contacts', JSON.stringify(c)); }
-
 function moveHistory(oldK, newK){
   if (oldK === newK) return;
   const merged = getHistory(newK).concat(getHistory(oldK));
   merged.sort((a, b) => (a.ts || 0) - (b.ts || 0));
   const seen = new Set();
-  const clean = merged.filter(m => {
-    const sig = m.ts + '|' + m.from + '|' + m.text;
-    if (seen.has(sig)) return false;
-    seen.add(sig);
-    return true;
-  });
+  const clean = merged.filter(m => { const sig = m.ts + '|' + m.from + '|' + m.text; if (seen.has(sig)) return false; seen.add(sig); return true; });
   setHistory(newK, clean);
   localStorage.removeItem(historyKey(oldK));
 }
-
 function mergeContactKey(oldK, newK, contacts){
   if (oldK === newK) return;
   moveHistory(oldK, newK);
   const o = contacts[oldK], n = contacts[newK];
-  if (n) {
-    n.lastMessage = n.lastMessage || o.lastMessage;
-    n.unread = (n.unread || 0) + (o.unread || 0);
-    n.lastSeen = Math.max(n.lastSeen || 0, o.lastSeen || 0);
-    n.peerId = n.peerId || o.peerId;
-  } else {
-    contacts[newK] = o;
-  }
+  if (n) { n.lastMessage = n.lastMessage || o.lastMessage; n.unread = (n.unread || 0) + (o.unread || 0); n.lastSeen = Math.max(n.lastSeen || 0, o.lastSeen || 0); n.peerId = n.peerId || o.peerId; }
+  else contacts[newK] = o;
   delete contacts[oldK];
   if (activeChatId === oldK) activeChatId = newK;
 }
-
 function adoptProfile(devId, peerId, name){
   const contacts = getContacts();
-
   if (contacts[peerId] && peerId !== devId) mergeContactKey(peerId, devId, contacts);
-
   if (!contacts[devId]) {
-    const lk = Object.keys(contacts).find(k =>
-      k !== devId && contacts[k].legacy &&
-      (contacts[k].peerId === peerId || contacts[k].name === name)
-    );
+    const lk = Object.keys(contacts).find(k => k !== devId && contacts[k].legacy && (contacts[k].peerId === peerId || contacts[k].name === name));
     if (lk) mergeContactKey(lk, devId, contacts);
   }
-
-  if (contacts[devId]) {
-    const c = contacts[devId];
-    c.name = name;
-    c.peerId = peerId;
-    c.lastSeen = Date.now();
-    c.legacy = false;
-    c.deviceId = devId;
-  } else {
-    contacts[devId] = { name, peerId, lastSeen: Date.now(), lastMessage: '', unread: 0, deviceId: devId, legacy: false };
-  }
-
+  if (contacts[devId]) { const c = contacts[devId]; c.name = name; c.peerId = peerId; c.lastSeen = Date.now(); c.legacy = false; c.deviceId = devId; }
+  else contacts[devId] = { name, peerId, lastSeen: Date.now(), lastMessage: '', unread: 0, deviceId: devId, legacy: false };
   saveContacts(contacts);
   renderContacts();
 }
-
 function touchContact(id, lastMessage = ''){
   if (id === myDevice || id === myId) return;
   const c = getContacts();
@@ -881,35 +649,10 @@ function touchContact(id, lastMessage = ''){
   else { c[id].lastSeen = Date.now(); if (lastMessage) c[id].lastMessage = lastMessage; }
   saveContacts(c); renderContacts();
 }
-
-function addUnread(id){
-  if (id === myDevice) return;
-  const c = getContacts();
-  if (!c[id]) return;
-  c[id].unread = (c[id].unread || 0) + 1;
-  saveContacts(c);
-  renderContacts();
-  updateTitle();
-}
-
-function clearUnread(id){
-  const c = getContacts();
-  if (c[id] && c[id].unread) {
-    c[id].unread = 0;
-    saveContacts(c);
-    renderContacts();
-  }
-  updateTitle();
-}
-
-function totalUnread(){
-  return Object.values(getContacts()).reduce((s, c) => s + (c.unread || 0), 0);
-}
-
-function updateTitle(){
-  const n = totalUnread();
-  document.title = (n ? '(' + n + ') ' : '') + 'شات زجاجي';
-}
+function addUnread(id){ if (id === myDevice) return; const c = getContacts(); if (!c[id]) return; c[id].unread = (c[id].unread || 0) + 1; saveContacts(c); renderContacts(); updateTitle(); }
+function clearUnread(id){ const c = getContacts(); if (c[id] && c[id].unread) { c[id].unread = 0; saveContacts(c); renderContacts(); } updateTitle(); }
+function totalUnread(){ return Object.values(getContacts()).reduce((s, c) => s + (c.unread || 0), 0); }
+function updateTitle(){ const n = totalUnread(); document.title = (n ? '(' + n + ') ' : '') + 'شات زجاجي'; }
 
 function renderContacts(){
   const q = ($('search').value || '').toLowerCase();
@@ -918,37 +661,16 @@ function renderContacts(){
     .filter(([id]) => id !== myDevice && id !== myId)
     .filter(([id, c]) => (c.name || '').toLowerCase().includes(q) || id.toLowerCase().includes(q))
     .sort((a, b) => (b[1].lastSeen || 0) - (a[1].lastSeen || 0));
-
   const box = $('contacts');
-  if (!entries.length) {
-    box.innerHTML = '<div class="empty"><svg class="icon" width="56" height="56"><use href="#i-chat"/></svg><span>لا توجد محادثات بعد</span></div>';
-    return;
-  }
-
+  if (!entries.length) { box.innerHTML = '<div class="empty"><svg class="icon" width="56" height="56"><use href="#i-chat"/></svg><span>لا توجد محادثات</span></div>'; return; }
   box.innerHTML = entries.map(([id, c], i) => {
     const online = !!onlinePeer && (c.peerId || id) === onlinePeer;
-    return '<div class="item glassbox" data-id="' + escapeHtml(id) + '" style="animation-delay:' + (i * 0.04) + 's">' +
-      '<div class="avatar' + (online ? ' online' : '') + '">' + escapeHtml((c.name || '؟').trim()[0] || '؟') + '<span class="dot"></span></div>' +
-      '<div class="grow"><div class="item-title">' + escapeHtml(c.name || id) + '</div>' +
-      '<div class="item-sub">' + escapeHtml(c.lastMessage || 'افتح المحادثة') + '</div></div>' +
-      (c.unread ? '<span class="badge">' + (c.unread > 99 ? '99+' : c.unread) + '</span>' : '') +
-      '<button class="item-del" data-del="' + escapeHtml(id) + '" aria-label="حذف"><svg class="icon" width="15" height="15"><use href="#i-x"/></svg></button>' +
-      '</div>';
+    return '<div class="item glassbox" data-id="' + escapeHtml(id) + '" style="animation-delay:' + (i * 0.04) + 's"><div class="avatar' + (online ? ' online' : '') + '">' + escapeHtml((c.name || '؟').trim()[0] || '؟') + '<span class="dot"></span></div><div class="grow"><div class="item-title">' + escapeHtml(c.name || id) + '</div><div class="item-sub">' + escapeHtml(c.lastMessage || 'افتح المحادثة') + '</div></div>' + (c.unread ? '<span class="badge">' + (c.unread > 99 ? '99+' : c.unread) + '</span>' : '') + '<button class="item-del" data-del="' + escapeHtml(id) + '" aria-label="حذف"><svg class="icon" width="15" height="15"><use href="#i-x"/></svg></button></div>';
   }).join('');
-
-  box.querySelectorAll('.item').forEach(el => {
-    el.onclick = () => openChat(el.dataset.id);
-  });
-  box.querySelectorAll('.item-del').forEach(btn => {
-    btn.onclick = e => {
-      e.stopPropagation();
-      const id = btn.dataset.del;
-      if (confirm('حذف هذا الشخص ومحادثته من جهازك؟')) removeContactAndHistory(id);
-    };
-  });
+  box.querySelectorAll('.item').forEach(el => { el.onclick = () => openChat(el.dataset.id); });
+  box.querySelectorAll('.item-del').forEach(btn => { btn.onclick = e => { e.stopPropagation(); const id = btn.dataset.del; if (confirm('حذف هذا الشخص؟')) removeContactAndHistory(id); }; });
 }
 
-/* ===== المحادثة ===== */
 function openChat(id, skipConnect = false){
   const ct = getContacts()[id];
   if (!ct) return;
@@ -965,11 +687,7 @@ function openChat(id, skipConnect = false){
   if (!skipConnect) ensureConnection(currentPeerId);
 }
 
-function updateChatHeader(name){
-  $('peerName').textContent = name || 'مستخدم';
-  $('peerAvatar').firstChild.textContent = (name || '؟').trim()[0] || '؟';
-}
-
+function updateChatHeader(name){ $('peerName').textContent = name || 'مستخدم'; $('peerAvatar').firstChild.textContent = (name || '؟').trim()[0] || '؟'; }
 function historyKey(id){ return 'glass_history_' + id; }
 function getHistory(id){ return JSON.parse(localStorage.getItem(historyKey(id)) || '[]'); }
 function setHistory(id, arr){ localStorage.setItem(historyKey(id), JSON.stringify(arr.slice(-500))); }
@@ -982,51 +700,24 @@ function pushMessage(id, msg){
   if (activeChatId === id && $('chatView').classList.contains('active')) appendBubble(msg);
 }
 
-function fmtTime(ts){
-  return new Date(ts).toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' });
-}
-
-function statusHtml(msg){
-  if (msg.from !== 'me') return '';
-  if (msg.status === 'pending') return '<svg class="icon xs" width="14" height="14"><use href="#i-clock"/></svg>';
-  return '<svg class="icon xs tick" width="14" height="14"><use href="#i-double"/></svg>';
-}
+function fmtTime(ts){ return new Date(ts).toLocaleTimeString('ar-SA', { hour: '2-digit', minute: '2-digit' }); }
+function statusHtml(msg){ if (msg.from !== 'me') return ''; if (msg.status === 'pending') return '<svg class="icon xs" width="14" height="14"><use href="#i-clock"/></svg>'; return '<svg class="icon xs tick" width="14" height="14"><use href="#i-double"/></svg>'; }
 
 function appendBubble(msg, scroll = true){
   const wrap = document.createElement('div');
   const isSticker = msg.kind === 'sticker';
   wrap.className = 'msg ' + (msg.from === 'me' ? 'me' : 'peer');
-
   let inner;
-  if (isSticker) {
-    const st = getStickers()[msg.stickerId];
-    if (st) inner = '<img class="sticker-img" src="' + st.dataUrl + '" alt="ملصق">';
-    else inner = '<button class="sticker-dl" data-sid="' + escapeHtml(msg.stickerId) + '"><svg class="icon" width="26" height="26"><use href="#i-download"/></svg><span>تحميل الملصق</span></button>';
-  } else {
-    inner = '<div class="text">' + escapeHtml(msg.text) + '</div>';
-  }
-
-  wrap.innerHTML = '<div class="bubble' + (isSticker ? ' sticker-bubble' : '') + '">' + inner +
-    '<div class="meta"><span>' + fmtTime(msg.ts) + '</span>' + statusHtml(msg) + '</div></div>';
-
+  if (isSticker) { const st = getStickers()[msg.stickerId]; if (st) inner = '<img class="sticker-img" src="' + st.dataUrl + '" alt="ملصق">'; else inner = '<button class="sticker-dl" data-sid="' + escapeHtml(msg.stickerId) + '"><svg class="icon" width="26" height="26"><use href="#i-download"/></svg><span>تحميل الملصق</span></button>'; }
+  else inner = '<div class="text">' + escapeHtml(msg.text) + '</div>';
+  wrap.innerHTML = '<div class="bubble' + (isSticker ? ' sticker-bubble' : '') + '">' + inner + '<div class="meta"><span>' + fmtTime(msg.ts) + '</span>' + statusHtml(msg) + '</div></div>';
   $('messages').appendChild(wrap);
-
-  wrap.querySelectorAll('.sticker-dl').forEach(b => {
-    b.onclick = () => requestSticker(b.dataset.sid);
-  });
-
+  wrap.querySelectorAll('.sticker-dl').forEach(b => { b.onclick = () => requestSticker(b.dataset.sid); });
   if (scroll) $('messages').scrollTop = $('messages').scrollHeight;
 }
 
-function renderMessages(id){
-  $('messages').innerHTML = '';
-  getHistory(id).forEach(m => appendBubble(m, false));
-  $('messages').scrollTop = $('messages').scrollHeight;
-}
-
-function msgPayload(m){
-  return { type: 'msg', text: m.text || '', ts: m.ts, kind: m.kind || 'text', stickerId: m.stickerId || null };
-}
+function renderMessages(id){ $('messages').innerHTML = ''; getHistory(id).forEach(m => appendBubble(m, false)); $('messages').scrollTop = $('messages').scrollHeight; }
+function msgPayload(m){ return { type: 'msg', text: m.text || '', ts: m.ts, kind: m.kind || 'text', stickerId: m.stickerId || null }; }
 
 function sendMsg(){
   const el = $('message');
@@ -1036,15 +727,12 @@ function sendMsg(){
   const ts = Date.now();
   const peerId = ct.peerId || activeChatId;
   let status = 'pending';
-  if (conn && conn.open && !conn._dead && conn.peer === peerId) {
-    try { conn.send(msgPayload({ text, ts })); status = 'sent'; } catch(e){}
-  } else {
-    ensureConnection(peerId);
-  }
+  if (conn && conn.open && !conn._dead && conn.peer === peerId) { try { conn.send(msgPayload({ text, ts })); status = 'sent'; } catch(e){} }
+  else ensureConnection(peerId);
   pushMessage(activeChatId, { from: 'me', kind: 'text', text, ts, status });
   el.value = '';
   el.style.height = 'auto';
-  if (status === 'pending') toast('الرسالة محفوظة وستُرسل عند الاتصال');
+  if (status === 'pending') toast('الرسالة محفوظة');
 }
 
 function syncPending(devKey){
@@ -1054,63 +742,23 @@ function syncPending(devKey){
   if (!conn || !conn.open || conn._dead || conn.peer !== peerId) return;
   const arr = getHistory(devKey);
   let changed = false;
-  arr.forEach((m, i) => {
-    if (m.from === 'me' && m.status === 'pending') {
-      try { conn.send(msgPayload(m)); arr[i].status = 'sent'; changed = true; } catch(e){}
-    }
-  });
+  arr.forEach((m, i) => { if (m.from === 'me' && m.status === 'pending') { try { conn.send(msgPayload(m)); arr[i].status = 'sent'; changed = true; } catch(e){} } });
   if (changed) { setHistory(devKey, arr); if (activeChatId === devKey) renderMessages(devKey); }
 }
 
-/* ===== الملصقات ===== */
 function getStickers(){ return JSON.parse(localStorage.getItem('glass_stickers') || '{}'); }
-function saveStickers(s){
-  try { localStorage.setItem('glass_stickers', JSON.stringify(s)); return true; }
-  catch(e){ toast('مساحة التخزين ممتلئة، احذف بعض الملصقات'); return false; }
-}
+function saveStickers(s){ try { localStorage.setItem('glass_stickers', JSON.stringify(s)); return true; } catch(e){ toast('مساحة ممتلئة'); return false; } }
+function addStickerData(id, dataUrl, name){ const s = getStickers(); s[id] = { id, dataUrl, name: name || 'ملصق', created: Date.now() }; saveStickers(s); }
 
-function addStickerData(id, dataUrl, name){
-  const s = getStickers();
-  s[id] = { id, dataUrl, name: name || 'ملصق', created: Date.now() };
-  saveStickers(s);
-}
-
-function toggleSheet(open){
-  const sheet = $('stickerSheet');
-  const willOpen = open === undefined ? !sheet.classList.contains('active') : open;
-  if (willOpen) { renderStickerGrid(); sheet.classList.add('active'); }
-  else sheet.classList.remove('active');
-}
+function toggleSheet(open){ const sheet = $('stickerSheet'); const willOpen = open === undefined ? !sheet.classList.contains('active') : open; if (willOpen) { renderStickerGrid(); sheet.classList.add('active'); } else sheet.classList.remove('active'); }
 
 function renderStickerGrid(){
   const entries = Object.entries(getStickers()).sort((a, b) => (b[1].created || 0) - (a[1].created || 0));
   const grid = $('stickerGrid');
-  if (!entries.length) {
-    grid.innerHTML = '<div class="empty-stickers">لا توجد ملصقات بعد<br>اضغط + لإنشاء ملصق من صورة</div>';
-    return;
-  }
-  grid.innerHTML = entries.map(([id, st], i) => {
-    return '<div class="sticker-tile" data-sid="' + escapeHtml(id) + '" style="animation-delay:' + (i * 0.03) + 's">' +
-      '<img src="' + st.dataUrl + '" alt="">' +
-      '<span class="del" data-del="' + escapeHtml(id) + '"><svg class="icon" width="12" height="12"><use href="#i-x"/></svg></span>' +
-      '</div>';
-  }).join('');
-
-  grid.querySelectorAll('.sticker-tile').forEach(tile => {
-    tile.onclick = () => sendSticker(tile.dataset.sid);
-  });
-  grid.querySelectorAll('.del').forEach(del => {
-    del.onclick = e => {
-      e.stopPropagation();
-      const id = del.dataset.del;
-      if (!confirm('حذف هذا الملصق من جهازك؟')) return;
-      const s = getStickers();
-      delete s[id];
-      saveStickers(s);
-      renderStickerGrid();
-      toast('تم حذف الملصق');
-    };
-  });
+  if (!entries.length) { grid.innerHTML = '<div class="empty-stickers">لا توجد ملصقات<br>اضغط + للإنشاء</div>'; return; }
+  grid.innerHTML = entries.map(([id, st], i) => '<div class="sticker-tile" data-sid="' + escapeHtml(id) + '" style="animation-delay:' + (i * 0.03) + 's"><img src="' + st.dataUrl + '" alt=""><span class="del" data-del="' + escapeHtml(id) + '"><svg class="icon" width="12" height="12"><use href="#i-x"/></svg></span></div>').join('');
+  grid.querySelectorAll('.sticker-tile').forEach(tile => { tile.onclick = () => sendSticker(tile.dataset.sid); });
+  grid.querySelectorAll('.del').forEach(del => { del.onclick = e => { e.stopPropagation(); const id = del.dataset.del; if (!confirm('حذف الملصق؟')) return; const s = getStickers(); delete s[id]; saveStickers(s); renderStickerGrid(); }; });
 }
 
 function createSticker(input){
@@ -1122,22 +770,14 @@ function createSticker(input){
     const max = 320;
     let w = img.width, h = img.height;
     const s = Math.min(1, max / Math.max(w, h));
-    w = Math.max(1, Math.round(w * s));
-    h = Math.max(1, Math.round(h * s));
+    w = Math.max(1, Math.round(w * s)); h = Math.max(1, Math.round(h * s));
     const cv = document.createElement('canvas');
     cv.width = w; cv.height = h;
     cv.getContext('2d').drawImage(img, 0, 0, w, h);
     let data;
     try { data = cv.toDataURL('image/webp', 0.85); } catch(e){ data = cv.toDataURL('image/png'); }
-    if (data.length > 600000) { toast('الصورة كبيرة جدًا للملصق'); }
-    else {
-      const id = 'st-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
-      const name = (file.name || 'ملصق').replace(/\.[^.]+$/, '') || 'ملصق';
-      if (addStickerData(id, data, name)) {
-        renderStickerGrid();
-        toast('تم إنشاء الملصق');
-      }
-    }
+    if (data.length > 600000) toast('الصورة كبيرة');
+    else { const id = 'st-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); const name = (file.name || 'ملصق').replace(/\.[^.]+$/, '') || 'ملصق'; if (addStickerData(id, data, name)) { renderStickerGrid(); toast('تم إنشاء الملصق'); } }
     URL.revokeObjectURL(url);
     input.value = '';
   };
@@ -1147,32 +787,25 @@ function createSticker(input){
 
 function sendSticker(sid){
   const ct = activeChatId ? getContacts()[activeChatId] : null;
-  if (!ct) { toast('افتح محادثة أولًا'); return; }
+  if (!ct) { toast('افتح محادثة'); return; }
   const st = getStickers()[sid];
   if (!st) return;
   const ts = Date.now();
   const peerId = ct.peerId || activeChatId;
   let status = 'pending';
-  if (conn && conn.open && !conn._dead && conn.peer === peerId) {
-    try { conn.send(msgPayload({ ts, kind: 'sticker', stickerId: sid })); status = 'sent'; } catch(e){}
-  } else {
-    ensureConnection(peerId);
-  }
+  if (conn && conn.open && !conn._dead && conn.peer === peerId) { try { conn.send(msgPayload({ ts, kind: 'sticker', stickerId: sid })); status = 'sent'; } catch(e){} }
+  else ensureConnection(peerId);
   pushMessage(activeChatId, { from: 'me', kind: 'sticker', stickerId: sid, text: '', ts, status });
 }
 
-function requestSticker(sid){
-  if (!conn || !conn.open || conn._dead) { toast('اتصل بالشخص أولًا لتحميل الملصق'); return; }
-  try { conn.send({ type: 'stickerReq', stickerId: sid }); toast('جارٍ طلب الملصق...'); } catch(e){ toast('تعذر الطلب الآن'); }
-}
+function requestSticker(sid){ if (!conn || !conn.open || conn._dead) { toast('اتصل أولًا'); return; } try { conn.send({ type: 'stickerReq', stickerId: sid }); toast('جارٍ الطلب...'); } catch(e){ toast('تعذر'); } }
 
-/* ===== إضافة وحذف ===== */
 function openAdd(){ $('addModal').classList.add('active'); setTimeout(() => $('friendId').focus(), 120); }
 function closeAdd(){ $('addModal').classList.remove('active'); $('friendId').value = ''; }
 
 function addAndConnect(){
   const id = $('friendId').value.trim().replace(/\s+/g, '');
-  if (!id) { toast('اكتب معرف الشخص'); return; }
+  if (!id) { toast('اكتب المعرف'); return; }
   if (id === myId || id === myDevice) { toast('لا يمكنك إضافة نفسك'); return; }
   const contacts = getContacts();
   if (!contacts[id]) contacts[id] = { name: id, peerId: id, lastSeen: Date.now(), lastMessage: '', unread: 0, legacy: true };
@@ -1181,13 +814,7 @@ function addAndConnect(){
   openChat(id);
 }
 
-function deleteChat(){
-  if (!activeChatId) return;
-  if (!confirm('هل تريد مسح هذه المحادثة؟')) return;
-  localStorage.removeItem(historyKey(activeChatId));
-  renderMessages(activeChatId);
-  toast('تم مسح المحادثة');
-}
+function deleteChat(){ if (!activeChatId) return; if (!confirm('مسح المحادثة؟')) return; localStorage.removeItem(historyKey(activeChatId)); renderMessages(activeChatId); toast('تم المسح'); }
 
 function removeContactAndHistory(id){
   const c = getContacts();
@@ -1198,16 +825,13 @@ function removeContactAndHistory(id){
   updateTitle();
   if (activeChatId === id) { activeChatId = null; showView('contactsView'); }
   try { if (conn && conn.peer === id) conn.close(); } catch(e){}
-  toast('تم حذف الشخص والمحادثة');
+  toast('تم الحذف');
 }
 
 function deleteAccount(){
-  if (!confirm('سيتم حذف حسابك وبياناتك من هذا الجهاز فقط.\nلا يمكن حذفك من أجهزة الآخرين بدون خادم.\nمتابعة؟')) return;
+  if (!confirm('سيتم حذف حسابك من هذا الجهاز.\nمتابعة؟')) return;
   try { if (conn && conn.open) conn.send({ type: 'deleteAccount', deviceId: myDevice }); } catch(e){}
-  setTimeout(() => {
-    Object.keys(localStorage).filter(k => k.startsWith('glass_')).forEach(k => localStorage.removeItem(k));
-    location.reload();
-  }, 250);
+  setTimeout(() => { Object.keys(localStorage).filter(k => k.startsWith('glass_')).forEach(k => localStorage.removeItem(k)); location.reload(); }, 250);
 }
 </script>
 </body>
