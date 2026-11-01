@@ -133,12 +133,13 @@ textarea{resize:none;line-height:1.6;max-height:120px;overflow-y:auto}
 .secondary{background:var(--glass-2);border:1px solid var(--border);color:var(--text);box-shadow:none}
 .toast{position:absolute;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);max-width:86%;background:rgba(10,14,30,.82);border:1px solid rgba(255,255,255,.16);padding:12px 20px;border-radius:999px;color:#fff;font-size:13px;font-weight:700;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;z-index:30;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 14px 40px rgba(0,0,0,.4)}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-.debug-bar{position:absolute;top:0;left:0;right:0;padding:6px 12px;font-size:11px;font-family:monospace;color:#fff;background:rgba(255,69,58,.85);text-align:center;z-index:50;display:none}
-.debug-bar.show{display:block}
+.netbar{position:absolute;top:0;left:0;right:0;padding:7px 12px;font-size:11px;font-weight:700;color:#fff;background:rgba(255,140,60,.92);text-align:center;z-index:40;transform:translateY(-100%);transition:transform .3s ease}
+.netbar.show{transform:none}
+.netbar.err{background:rgba(255,69,58,.92)}
 </style>
 </head>
 <body>
-<div class="debug-bar" id="debugBar"></div>
+<div class="netbar" id="netBar"></div>
 
 <svg style="display:none" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
   <symbol id="i-back" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
@@ -252,8 +253,9 @@ textarea{resize:none;line-height:1.6;max-height:120px;overflow-y:auto}
   <div id="addModal" class="modal" onclick="if(event.target===this) closeAdd()">
     <div class="card glassbox">
       <h3>إضافة شخص</h3>
-      <p class="muted" style="margin:0">الصق معرف الشخص.</p>
-      <input id="friendId" placeholder="مثال: user-abc12345" onkeydown="if(event.key==='Enter') addAndConnect()">
+      <p class="muted" style="margin:0">الصق معرف الشخص، واكتب اسمه اختياريًا.</p>
+      <input id="friendId" placeholder="المعرف: مثال user-abc12345" onkeydown="if(event.key==='Enter') addAndConnect()">
+      <input id="friendName" placeholder="اسم الشخص (اختياري)">
       <div class="row">
         <button onclick="addAndConnect()">اتصال</button>
         <button class="secondary" onclick="closeAdd()">إلغاء</button>
@@ -265,15 +267,10 @@ textarea{resize:none;line-height:1.6;max-height:120px;overflow-y:auto}
 
 <script>
 const $ = id => document.getElementById(id);
-const dbg = (msg, isErr) => {
-  console.log('[Chatoo]', msg);
-  const bar = $('debugBar');
-  if (isErr) { bar.textContent = '⚠ ' + msg; bar.classList.add('show'); setTimeout(() => bar.classList.remove('show'), 4000); }
-};
 
 let peer = null, conn = null, currentPeerId = null, activeChatId = null, lastActivePeerId = null;
 let idRetries = 0, reconnectTimer = null, hbTimer = null, mgrTimer = null, lastAlive = Date.now();
-let serverReconnectAttempts = 0;
+let sigTimer = null, sigAttempts = 0, serverState = 'offline', pendingConnectId = null;
 let myId = localStorage.getItem('glass_id') || '';
 let myName = localStorage.getItem('glass_name') || '';
 let myDevice = localStorage.getItem('glass_device') || '';
@@ -292,7 +289,6 @@ window.addEventListener('DOMContentLoaded', () => {
   const msgEl = $('message');
   msgEl.addEventListener('input', () => { msgEl.style.height = 'auto'; msgEl.style.height = Math.min(msgEl.scrollHeight, 110) + 'px'; });
   document.addEventListener('visibilitychange', () => { if (document.hidden) return; lastAlive = Date.now(); healConnection(); });
-  dbg('✅ التطبيق جاهز');
 });
 
 function onMsgKey(e){
@@ -316,7 +312,31 @@ function sanitizeSelf(){
   if (changed) saveContacts(c);
 }
 
-/* ===== نواة الاتصال المُصلحة ===== */
+/* ===== شريط حالة خادم الإشارة ===== */
+function setServerState(s, detail){
+  serverState = s;
+  const bar = $('netBar');
+  if (s === 'online') { bar.classList.remove('show'); return; }
+  bar.textContent = s === 'connecting'
+    ? '⏳ جارٍ الاتصال بخادم الإشارة...'
+    : '⚠ خادم الإشارة غير متصل — إعادة المحاولة تلقائيًا' + (detail ? ' (' + detail + ')' : '');
+  bar.classList.toggle('err', s !== 'connecting');
+  bar.classList.add('show');
+}
+
+/* ===== إعادة محاولة خادم الإشارة بتباعد متزايد ===== */
+function retrySignaling(){
+  if (sigTimer) return;
+  const delay = Math.min(15000, 1200 * Math.pow(1.4, sigAttempts++));
+  sigTimer = setTimeout(() => {
+    sigTimer = null;
+    if (!peer || peer.destroyed) { setupPeer(); return; }
+    try { peer.reconnect(); setServerState('connecting'); }
+    catch(e){ setupPeer(); }
+  }, delay);
+}
+
+/* ===== نواة الاتصال ===== */
 function startHeartbeat(){
   if (hbTimer) return;
   hbTimer = setInterval(() => {
@@ -334,20 +354,12 @@ function startConnManager(){
 
 function healConnection(){
   if (!peer || peer.destroyed) return;
-  if (peer.disconnected) {
-    if (serverReconnectAttempts < 5) {
-      serverReconnectAttempts++;
-      try { peer.reconnect(); } catch(e){}
-    }
-    return;
-  }
-  serverReconnectAttempts = 0;
+  if (!peer.open || peer.disconnected) { retrySignaling(); return; }
 
-  const target = activeChatId || lastActivePeerId;
+  const target = activeChatId || lastActivePeerId || pendingConnectId;
   if (!target) return;
   const ct = getContacts()[target];
-  if (!ct) return;
-  const peerId = ct.peerId || target;
+  const peerId = ct ? (ct.peerId || target) : target;
   if (!peerId) return;
 
   const cur = conn;
@@ -371,10 +383,18 @@ function maybeReconnect(peerId){
   if (ct) scheduleReconnect(peerId);
 }
 
+/* لا نحاول الاتصال قبل جهوزية خادم الإشارة — نطابره بدل فقدان الرسالة */
 function ensureConnection(peerId){
   if (!peerId) return;
   if (conn && conn.peer === peerId && conn.open && !conn._dead) { connStatus('متصل الآن', true, peerId); return; }
   if (!peer || peer.destroyed) { connStatus('غير متصل', false, peerId); return; }
+  if (!peer.open || peer.disconnected) {
+    pendingConnectId = peerId;
+    connStatus('بانتظار خادم الإشارة...', false, peerId);
+    retrySignaling();
+    return;
+  }
+  pendingConnectId = null;
   connStatus('جارٍ الاتصال...', false, peerId);
   adoptConn(peer.connect(peerId, { reliable: true }), true);
 }
@@ -414,7 +434,6 @@ function adoptConn(c, outgoing){
       const ct = getContacts()[activeChatId];
       if (ct && (ct.peerId || activeChatId) === c.peer) syncPending(activeChatId);
     }
-    dbg('🟢 قناة مفتوحة مع ' + c.peer.slice(0, 12));
   });
 
   c.on('data', d => { if (conn === c) handleData(d, c); });
@@ -424,15 +443,13 @@ function adoptConn(c, outgoing){
     if (conn !== c) return;
     connStatus('غير متصل', false, c.peer);
     maybeReconnect(c.peer);
-    dbg('🔴 انقطعت القناة');
   });
 
-  c.on('error', (err) => {
+  c.on('error', () => {
     c._dead = true;
     if (conn !== c) return;
-    connStatus('خطأ اتصال', false, c.peer);
+    connStatus('انقطع الاتصال', false, c.peer);
     maybeReconnect(c.peer);
-    dbg('⚠ خطأ: ' + (err.message || err), true);
   });
 
   return true;
@@ -453,40 +470,40 @@ function refreshDots(){
   });
 }
 
-/* ===== إعداد PeerJS مع خوادم متعددة ===== */
 function setupPeer(){
   if (!myId) return;
-  if (typeof Peer === 'undefined') { dbg('PeerJS غير محمّل!', true); return; }
+  if (typeof Peer === 'undefined') { setServerState('offline', 'مكتبة الاتصال غير محملة'); return; }
   if (peer) { try { peer.destroy(); } catch(e){} }
 
-  // خوادم متعددة لزيادة الموثوقية
-  const iceServers = [
-    { urls: 'stun:stun.l.google.com:19302' },
-    { urls: 'stun:stun1.l.google.com:19302' },
-    { urls: 'stun:stun2.l.google.com:19302' },
-    { urls: 'stun:stun.cloudflare.com:3478' },
-    { urls: 'stun:global.stun.twilio.com:3478' }
-  ];
+  setServerState('connecting');
 
   peer = new Peer(myId, {
     debug: 0,
-    config: { iceServers: iceServers }
+    config: {
+      iceServers: [
+        { urls: 'stun:stun.l.google.com:19302' },
+        { urls: 'stun:stun1.l.google.com:19302' },
+        { urls: 'stun:stun2.l.google.com:19302' },
+        { urls: 'stun:stun.cloudflare.com:3478' },
+        { urls: 'stun:global.stun.twilio.com:3478' }
+      ]
+    }
   });
 
   peer.on('open', id => {
     myId = id;
     idRetries = 0;
-    serverReconnectAttempts = 0;
+    sigAttempts = 0;
     localStorage.setItem('glass_id', myId);
     renderMe();
+    setServerState('online');
+    if (pendingConnectId) { const t = pendingConnectId; pendingConnectId = null; ensureConnection(t); }
     healConnection();
-    dbg('🌐 متصل بخادم PeerJS');
   });
 
   peer.on('connection', c => adoptConn(c, false));
 
   peer.on('error', err => {
-    dbg('خطأ PeerJS: ' + err.type, true);
     if (err.type === 'unavailable-id') {
       if (idRetries < 3) { idRetries++; setTimeout(() => setupPeer(), 1200 * idRetries); }
       else { idRetries = 0; myId = makeId(); localStorage.setItem('glass_id', myId); renderMe(); setupPeer(); }
@@ -497,19 +514,23 @@ function setupPeer(){
         if (ct && (ct.peerId || activeChatId) === err.peer) setPeerStatus('غير متصل الآن', false);
       }
     }
-    else if (err.type === 'network' || err.type === 'server-error' || err.type === 'socket-error' || err.type === 'socket-closed') {
-      if (serverReconnectAttempts < 5) {
-        serverReconnectAttempts++;
-        setTimeout(() => { if (peer) try { peer.reconnect(); } catch(e){} }, 2000 + Math.random() * 1000);
-      }
+    else if (err.type === 'browser-incompatible') {
+      setServerState('offline', 'المتصفح غير مدعوم');
+    }
+    else {
+      setServerState('offline', err.type);
+      retrySignaling();
     }
   });
 
   peer.on('disconnected', () => {
-    if (serverReconnectAttempts < 5) {
-      serverReconnectAttempts++;
-      try { peer.reconnect(); } catch(e){}
-    }
+    setServerState('offline');
+    retrySignaling();
+  });
+
+  peer.on('close', () => {
+    setServerState('offline');
+    retrySignaling();
   });
 }
 
@@ -732,7 +753,7 @@ function sendMsg(){
   pushMessage(activeChatId, { from: 'me', kind: 'text', text, ts, status });
   el.value = '';
   el.style.height = 'auto';
-  if (status === 'pending') toast('الرسالة محفوظة');
+  if (status === 'pending') toast('الرسالة محفوظة وستُرسل عند الاتصال');
 }
 
 function syncPending(devKey){
@@ -801,14 +822,16 @@ function sendSticker(sid){
 function requestSticker(sid){ if (!conn || !conn.open || conn._dead) { toast('اتصل أولًا'); return; } try { conn.send({ type: 'stickerReq', stickerId: sid }); toast('جارٍ الطلب...'); } catch(e){ toast('تعذر'); } }
 
 function openAdd(){ $('addModal').classList.add('active'); setTimeout(() => $('friendId').focus(), 120); }
-function closeAdd(){ $('addModal').classList.remove('active'); $('friendId').value = ''; }
+function closeAdd(){ $('addModal').classList.remove('active'); $('friendId').value = ''; $('friendName').value = ''; }
 
 function addAndConnect(){
   const id = $('friendId').value.trim().replace(/\s+/g, '');
+  const label = $('friendName').value.trim();
   if (!id) { toast('اكتب المعرف'); return; }
   if (id === myId || id === myDevice) { toast('لا يمكنك إضافة نفسك'); return; }
   const contacts = getContacts();
-  if (!contacts[id]) contacts[id] = { name: id, peerId: id, lastSeen: Date.now(), lastMessage: '', unread: 0, legacy: true };
+  if (!contacts[id]) contacts[id] = { name: label || id, peerId: id, lastSeen: Date.now(), lastMessage: '', unread: 0, legacy: true };
+  else if (label) contacts[id].name = label;
   saveContacts(contacts);
   closeAdd();
   openChat(id);
